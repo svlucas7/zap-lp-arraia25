@@ -46,7 +46,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Swiper CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <link rel="preload" href="https://unpkg.com/swiper/swiper-bundle.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"></noscript>
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -149,7 +150,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-junino-yellow/5 to-junino-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/CANECA.png" alt="Canecas Personalizadas" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/CANECA.webp" alt="Canecas Personalizadas para festas juninas" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Canecas Personalizadas</h3>
                                     <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Cerâmica, plásticas e térmicas</p>
@@ -177,7 +178,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-junino-red/5 to-junino-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/ADESIVOS.png" alt="Adesivos Personalizados" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/ADESIVOS.webp" alt="Adesivos Personalizados à prova d'água" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Adesivos</h3>
                                     <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Resistente à água e sol</p>
@@ -195,14 +196,14 @@
                         <div class="swiper-slide">
                             <div class="group bg-white rounded-3xl p-6 shadow-xl hover:shadow-2xl transform hover:-translate-y-3 transition-all duration-500 border border-gray-100 relative overflow-hidden h-full flex flex-col">
                                 <div class="absolute top-4 right-4 z-20">
-                                    <span class="bg-junino-green text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                                    <span class="bg-junino-green text-gray-800 text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                                         👍 Popular
                                     </span>
                                 </div>
                                 <div class="absolute inset-0 bg-junino-green/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/PULSEIRAS.png" alt="Pulseiras de Identificação" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/PULSEIRAS.webp" alt="Pulseiras de Identificação Tyvek" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Pulseiras de Identificação</h3>
                                     <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Tyvek resistente com numeração</p>
@@ -227,7 +228,7 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-pink-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/EMBALAGEM PARA DELIVERY.png" alt="Embalagem para Delivery" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/EMBALAGEM PARA DELIVERY.webp" alt="Embalagem para Delivery personalizada" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Embalagem para Delivery</h3>
                                     <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Caixas e sacolas personalizadas</p>
@@ -252,10 +253,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-junino-blue/5 to-junino-green/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/CONVITES.png" alt="Convites Premium" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/CONVITES.webp" alt="Convites personalizados para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Convites Premium</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Papel especial 300g com verniz</p>
+                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Convites</h3>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Físicos, digitais e animados</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">📜 Papel 300g</span>
                                         <span class="text-sm">✨ Verniz UV</span>
@@ -277,10 +278,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-junino-orange/5 to-junino-yellow/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/CARTAZ.png" alt="Cartazes HD" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/CARTAZ.webp" alt="Cartazes para divulgação de festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Cartazes HD</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Impressão 4x0 cores alta resolução</p>
+                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Cartaz A3</h3>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Divulgue sua festa com estilo</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">🖨️ 4x0 cores</span>
                                         <span class="text-sm">📏 Vários tamanhos</span>
@@ -302,10 +303,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-indigo-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/PANFLETOS.png" alt="Panfletos" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/PANFLETOS.webp" alt="Panfletos para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Panfletos</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Folhetos promocionais coloridos</p>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Distribua e atraia mais gente</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">📰 Marketing</span>
                                         <span class="text-sm">🎨 Colorido</span>
@@ -327,8 +328,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-teal-500/5 to-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/CARDÁPIOS.png" alt="Cardápios" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/CARDÁPIOS.webp" alt="Cardápios personalizados para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
+                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Cardápios</h3>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Apresente suas delícias</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">🍽️ Gastronômico</span>
                                         <span class="text-sm">📋 Organizado</span>
@@ -350,10 +353,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-junino-blue/5 to-junino-orange/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/INGRESSOS.png" alt="Ingressos de Entrada" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/INGRESSOS.webp" alt="Ingressos de segurança para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Ingressos de Entrada</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Papel segurança com canhoto</p>
+                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Ingressos de Segurança</h3>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Controle o acesso com eficiência</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">🎫 Com canhoto</span>
                                         <span class="text-sm">🔒 Anti-falsificação</span>
@@ -375,10 +378,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-junino-red/5 to-junino-blue/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/RIFAS.png" alt="Rifas Personalizadas" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/RIFAS.webp" alt="Rifas e cartelas de bingo para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
-                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Rifas Numeradas</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Papel 90g com numeração sequencial</p>
+                                    <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Rifas e Cartelas de Bingo</h3>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Organize sorteios e brincadeiras</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">🎲 Sequencial</span>
                                         <span class="text-sm">📝 Destacável</span>
@@ -400,10 +403,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-pink-500/5 to-rose-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/RASPADINHA.png" alt="Raspadinhas Personalizadas" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/RASPADINHA.webp" alt="Raspadinhas personalizadas para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Raspadinhas</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Cartela promocional interativa</p>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Crie promoções e surpreenda</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">🎰 Interativo</span>
                                         <span class="text-sm">🏆 Premiação</span>
@@ -425,10 +428,10 @@
                                 <div class="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-yellow-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                                 <div class="relative z-10 flex flex-col flex-grow">
                                     <div class="bg-gradient-to-br from-yellow-50 to-orange-50 rounded-2xl p-6 mb-4 group-hover:scale-105 transition-transform duration-300">
-                                        <img src="assets/images/FORRO DE BANDEJA.png" alt="Forro de Bandeja Personalizado" class="w-full h-40 object-cover rounded-2xl">
+                                        <img src="assets/images/webp/FORRO DE BANDEJA.webp" alt="Forro de bandeja personalizado para festa junina" class="w-full h-40 object-cover rounded-2xl" loading="lazy" width="250" height="160">
                                     </div>
                                     <h3 class="text-xl font-bold text-gray-800 text-center mb-2">Forro de Bandeja</h3>
-                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Papel offset personalizado para alimentos</p>
+                                    <p class="text-sm text-gray-600 text-center mb-4 flex-grow">Higiene e divulgação na sua mesa</p>
                                     <div class="flex justify-center items-center space-x-2 mb-6">
                                         <span class="text-sm">🍽️ Higiênico</span>
                                         <span class="text-sm">🎨 Promocional</span>
@@ -647,17 +650,26 @@
                 <div>
                     <h3 class="text-xl font-bold mb-4">Fale Conosco</h3>
                     <div class="space-y-3">
-                        <a href="https://api.whatsapp.com/message/M3BDJVL2DGIMA1?autoload=1&app_absent=0">
-                            <span class="mr-2">📱</span>
-                            (31) 2566-6500
+                        <a href="https://api.whatsapp.com/message/M3BDJVL2DGIMA1?autoload=1&app_absent=0" class="flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition-colors duration-300">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.518.759a1.195 1.195 0 00-.54 1.059v.052a12.182 12.182 0 005.456 5.456h.052c.412 0 .79-.213 1.059-.54l.759-1.518a1 1 0 011.06-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                            </svg>
+                            <span>(31) 2566-6500</span>
                         </a>
                         <a href="mailto:atendimento@zapgrafica.com.br" class="flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition-colors duration-300">
-                            <span class="mr-2">✉️</span>
-                            atendimento@zapgrafica.com.br
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+                            </svg>
+                            <span>atendimento@zapgrafica.com.br</span>
                         </a>
                         <a href="https://instagram.com/zap_grafica" target="_blank" class="flex items-center justify-center md:justify-start text-gray-300 hover:text-white transition-colors duration-300">
-                            <span class="mr-2">📸</span>
-                            @zap_gafica
+                           <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
+                                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                            </svg>
+                            <span>@zap_grafica</span>
                         </a>
                     </div>
                 </div>
@@ -665,10 +677,15 @@
                 <!-- Localização -->
                 <div>
                     <h3 class="text-xl font-bold mb-4">Onde Estamos</h3>
-                    <p class="text-gray-300">
-                        📍 Contagem, MG<br>
-                        Atendemos toda a região metropolitana
-                    </p>
+                    <div class="text-gray-300 space-y-1">
+                        <p class="flex items-center justify-center md:justify-start">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2 flex-shrink-0" viewBox="0 0 20 20" fill="currentColor">
+                              <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                            </svg>
+                            <span>Contagem, MG</span>
+                        </p>
+                        <p class="pl-7">Atendemos toda a região metropolitana</p>
+                    </div>
                     <div class="mt-4">
                         <span class="text-sm text-gray-400">
                             Horário de Atendimento:<br>
@@ -690,60 +707,20 @@
 
     <!-- Botão Flutuante do WhatsApp -->
     <a href="https://api.whatsapp.com/message/M3BDJVL2DGIMA1?autoload=1&app_absent=0" target="_blank" class="fixed bottom-6 right-6 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transform hover:scale-110 transition-all duration-300 z-50" aria-label="Fale conosco no WhatsApp">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="currentColor"></svg>
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01s-.521.074-.792.372c-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.626.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
         </svg>
     </a>
 
-    <!-- Script -->
-    <script src="assets/js/script.js"></script>
-
     <!-- Swiper JS -->
-    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js" defer></script>
+    
+    <!-- Script -->
+    <script src="assets/js/script.js" defer></script>
 
     <!-- RD Station Forms -->
-    <script type="text/javascript" src="https://d335luupugsy2.cloudfront.net/js/rdstation-forms/stable/rdstation-forms.min.js"></script>
+    <script type="text/javascript" async src="https://d335luupugsy2.cloudfront.net/js/rdstation-forms/stable/rdstation-forms.min.js"></script>
     <script type="text/javascript"> new RDStationForms('formulario-zap-arraia-51f62e0f9cd3842dfbfc', 'UA-26024689-3').createForm();</script>
 
-    <!-- Inicialização do Swiper -->
-    <script>
-        var swiper = new Swiper('.product-swiper', {
-            // Parâmetros
-            slidesPerView: 1.2,
-            spaceBetween: 16,
-            centeredSlides: true,
-            loop: true,
-            // Paginação
-            pagination: {
-                el: '.swiper-pagination',
-                clickable: true,
-            },
-            // Navegação
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            // Responsivo
-            breakpoints: {
-                // quando a largura da janela for >= 640px
-                640: {
-                    slidesPerView: 2,
-                    spaceBetween: 20,
-                    centeredSlides: false,
-                },
-                // quando a largura da janela for >= 768px
-                768: {
-                    slidesPerView: 3,
-                    spaceBetween: 30
-                },
-                // quando a largura da janela for >= 1024px
-                1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 30,
-                    centeredSlides: false,
-                }
-            }
-        });
-    </script>
 </body>
 </html>

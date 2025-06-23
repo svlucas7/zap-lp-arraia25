@@ -170,6 +170,45 @@ document.addEventListener('DOMContentLoaded', function() {
     // ========== PARTÍCULAS FLUTUANTES ==========
     createFloatingParticles();    // ========== LAZY LOADING DE IMAGENS ==========
     setupLazyLoading();
+
+    // ========== SWIPER CARROSSEL ==========
+    var swiper = new Swiper('.product-swiper', {
+        // Parâmetros
+        slidesPerView: 1.2,
+        spaceBetween: 16,
+        centeredSlides: true,
+        loop: true,
+        // Paginação
+        pagination: {
+            el: '.swiper-pagination',
+            clickable: true,
+        },
+        // Navegação
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+        // Responsivo
+        breakpoints: {
+            // quando a largura da janela for >= 640px
+            640: {
+                slidesPerView: 2,
+                spaceBetween: 20,
+                centeredSlides: false,
+            },
+            // quando a largura da janela for >= 768px
+            768: {
+                slidesPerView: 3,
+                spaceBetween: 30
+            },
+            // quando a largura da janela for >= 1024px
+            1024: {
+                slidesPerView: 4,
+                spaceBetween: 30,
+                centeredSlides: false,
+            }
+        }
+    });
 });
 
 // ========== FUNÇÕES AUXILIARES ==========

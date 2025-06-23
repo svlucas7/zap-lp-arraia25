@@ -83,11 +83,11 @@ body {
 .swiper-button-next, .swiper-button-prev {
     background-color: white;
     border-radius: 50%;
-    width: 44px;
-    height: 44px;
+    width: 56px; /* Aumentado para melhor toque */
+    height: 56px; /* Aumentado para melhor toque */
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     transition: all 0.3s ease;
-    color: var(--junino-red);
+    color: var(--junino-red) !important; /* Garante que a cor seja aplicada */
 }
 
 .swiper-button-next:hover, .swiper-button-prev:hover {
@@ -97,21 +97,41 @@ body {
 }
 
 .swiper-button-next::after, .swiper-button-prev::after {
-    font-size: 18px;
+    font-size: 24px; /* Aumentado para melhor visibilidade */
     font-weight: bold;
 }
 
 /* Estilização da paginação do Swiper */
 .swiper-pagination-bullet {
     background-color: var(--junino-orange);
-    opacity: 0.5;
+    width: 12px;
+    height: 12px;
+    opacity: 0.6;
     transition: all 0.3s ease;
 }
 
 .swiper-pagination-bullet-active {
     background-color: var(--junino-red);
+    width: 24px;
+    border-radius: 6px;
     opacity: 1;
-    transform: scale(1.2);
+}
+
+/* Correção de contraste para botões */
+.add-to-kit-btn {
+    background-color: var(--junino-orange);
+    color: #4A2E0A; /* Cor de texto mais escura para contraste */
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+}
+
+.bg-junino-green.text-white {
+    color: #FFFFFF !important;
+}
+
+.bg-junino-orange.text-white {
+    color: #4A2E0A !important; /* Usando a mesma cor escura */
 }
 
 @keyframes productFadeIn {
