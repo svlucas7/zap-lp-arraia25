@@ -3,6 +3,62 @@
 // Aguarda o carregamento completo da página
 document.addEventListener('DOMContentLoaded', function() {
     
+    // ========== RASTREAMENTO DE EVENTOS ==========
+    
+    // Rastrear cliques nos botões de WhatsApp
+    const whatsappButtons = document.querySelectorAll('a[href*="whatsapp"], a[href*="wa.me"]');
+    whatsappButtons.forEach((button, index) => {
+        button.addEventListener('click', function(e) {
+            // Identifica o tipo de botão WhatsApp
+            let buttonType = 'whatsapp_button';
+            if (button.classList.contains('fixed')) {
+                buttonType = 'whatsapp_floating';
+            } else if (button.closest('.hero') || button.closest('section') && button.closest('section').querySelector('h1')) {
+                buttonType = 'whatsapp_hero';
+            } else if (button.closest('#orcamento')) {
+                buttonType = 'whatsapp_form_section';
+            }
+            
+            // Rastreamento Google Analytics
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click', {
+                    'event_category': 'engagement', 
+                    'event_label': buttonType,
+                    'custom_parameter_1': 'festa_junina_2025',
+                    'value': 1
+                });
+                
+                gtag('event', 'generate_lead', {
+                    'currency': 'BRL',
+                    'value': 50.00
+                });
+            }
+            
+            // Rastreamento Meta Pixel
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Contact', {
+                    content_name: buttonType,
+                    content_category: 'whatsapp_click',
+                    value: 50.00,
+                    currency: 'BRL'
+                });
+                
+                fbq('track', 'Lead');
+            }
+            
+            // RD Station Marketing (evento customizado)
+            if (typeof rdstation_tracking !== 'undefined') {
+                rdstation_tracking.track('conversion', {
+                    cf_whatsapp_click: buttonType,
+                    cf_source: 'landing_page',
+                    cf_campaign: 'festa_junina_2025'
+                });
+            }
+            
+            console.log('WhatsApp click tracked:', buttonType);
+        });
+    });
+    
     // ========== SCROLL SUAVE ==========
     window.scrollToForm = function() {
         const formSection = document.getElementById('orcamento');
@@ -12,7 +68,77 @@ document.addEventListener('DOMContentLoaded', function() {
                 block: 'start'
             });
         }
-    };
+    };    // ========== RASTREAMENTO FORMULÁRIO RD STATION ==========
+    
+    // Monitorar formulário RD Station
+    const observeRDForm = setInterval(() => {
+        const rdForm = document.querySelector('#formulario-zap-arraia-51f62e0f9cd3842dfbfc form');
+        if (rdForm) {
+            clearInterval(observeRDForm);
+            
+            rdForm.addEventListener('submit', function(e) {
+                // Rastreamento Google Analytics
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'form_submit', {
+                        'event_category': 'lead_generation',
+                        'event_label': 'rd_station_form',
+                        'custom_parameter_1': 'festa_junina_2025',
+                        'value': 100
+                    });
+                    
+                    gtag('event', 'generate_lead', {
+                        'currency': 'BRL',
+                        'value': 100.00
+                    });
+                }
+                
+                // Rastreamento Meta Pixel
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead', {
+                        content_name: 'formulario_orcamento',
+                        content_category: 'form_submission',
+                        value: 100.00,
+                        currency: 'BRL'
+                    });
+                    
+                    fbq('track', 'CompleteRegistration');
+                }
+                
+                // RD Station Marketing (evento customizado)
+                if (typeof rdstation_tracking !== 'undefined') {
+                    rdstation_tracking.track('conversion', {
+                        cf_form_submit: 'orcamento_festa_junina',
+                        cf_source: 'landing_page',
+                        cf_campaign: 'festa_junina_2025'
+                    });
+                }
+                
+                console.log('Form submission tracked: RD Station form');
+            });
+            
+            // Rastrear foco nos campos do formulário
+            const formFields = rdForm.querySelectorAll('input, textarea, select');
+            formFields.forEach(field => {
+                field.addEventListener('focus', function() {
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'form_start', {
+                            'event_category': 'engagement',
+                            'event_label': 'rd_station_form_interaction'
+                        });
+                    }
+                    
+                    if (typeof fbq !== 'undefined') {
+                        fbq('track', 'InitiateCheckout');
+                    }
+                }, { once: true }); // Só dispara uma vez
+            });
+        }
+    }, 500);
+    
+    // Para o observer após 10 segundos se não encontrar o formulário
+    setTimeout(() => {
+        clearInterval(observeRDForm);
+    }, 10000);
 
     // ========== FORMULÁRIO DE ORÇAMENTO ==========
     const form = document.getElementById('orcamentoForm');
@@ -267,23 +393,54 @@ function setupLazyLoading() {
     });
 }
 
-// Função para tracking de eventos (integração futura com Google Analytics/RD Station)
+// Função para rastreamento de eventos (integração com Google Analytics/RD Station/Meta)
 function trackEvent(eventName, eventData = {}) {
     console.log('Event tracked:', eventName, eventData);
     
     // Google Analytics 4
     if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventData);
+        gtag('event', eventName, {
+            'event_category': eventData.category || 'engagement',
+            'event_label': eventData.label || '',
+            'custom_parameter_1': eventData.campaign || 'festa_junina_2025',
+            'value': eventData.value || 1,
+            ...eventData
+        });
     }
     
-    // RD Station (quando integrado)
-    if (typeof RdIntegration !== 'undefined') {
-        RdIntegration.track(eventName, eventData);
-    }
-    
-    // Facebook Pixel (quando integrado)
+    // Meta Pixel (Facebook)
     if (typeof fbq !== 'undefined') {
-        fbq('track', eventName, eventData);
+        const metaEventName = eventData.metaEvent || eventName;
+        fbq('track', metaEventName, {
+            content_name: eventData.label || eventName,
+            content_category: eventData.category || 'engagement',
+            value: eventData.value || 0,
+            currency: eventData.currency || 'BRL',
+            ...eventData.metaParams
+        });
+    }
+    
+    // RD Station Marketing
+    if (typeof rdstation_tracking !== 'undefined') {
+        rdstation_tracking.track('conversion', {
+            cf_event_name: eventName,
+            cf_event_category: eventData.category || 'engagement',
+            cf_source: 'landing_page',
+            cf_campaign: eventData.campaign || 'festa_junina_2025',
+            ...eventData.rdParams
+        });
+    }
+    
+    // DataLayer para Google Tag Manager
+    if (typeof dataLayer !== 'undefined') {
+        dataLayer.push({
+            'event': eventName,
+            'event_category': eventData.category || 'engagement',
+            'event_label': eventData.label || '',
+            'custom_dimension_1': eventData.campaign || 'festa_junina_2025',
+            'value': eventData.value || 1,
+            ...eventData.gtmParams
+        });
     }
 }
 
@@ -453,6 +610,18 @@ if (requestQuoteButton) {
     requestQuoteButton.addEventListener('click', function() {
         const kitSummaryText = Object.values(kitItems).map(item => `- ${item.name} (Quantidade: ${item.quantity})`).join('\n');
         const fullMessage = `Olá! Gostaria de um orçamento para o seguinte kit de festa junina:\n\n${kitSummaryText}`;
+
+        // Rastreamento do kit personalizado
+        trackEvent('kit_quote_request', {
+            category: 'lead_generation',
+            label: 'monte_seu_kit',
+            value: Object.values(kitItems).length,
+            metaEvent: 'Lead',
+            metaParams: {
+                content_name: 'kit_arraia_personalizado',
+                num_items: Object.values(kitItems).length
+            }
+        });
 
         // Espera um pouco para o caso do formulário RD ainda não ter carregado completamente
         setTimeout(() => {

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Rastreamento - Zap Gráfica</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 0 auto; padding: 20px; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px; }
+        .success { background-color: #d4edda; border-color: #c3e6cb; }
+        .warning { background-color: #fff3cd; border-color: #ffeaa7; }
+        .error { background-color: #f8d7da; border-color: #f5c6cb; }
+        button { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .log { background: #f8f9fa; padding: 10px; border-radius: 4px; margin: 10px 0; font-family: monospace; }
+        #console-log { max-height: 300px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Teste de Rastreamento - Landing Page Festa Junina</h1>
+    
+    <div class="test-section">
+        <h2>1. Verificação de Tags Instaladas</h2>
+        <div id="tags-status"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>2. Teste de Eventos</h2>
+        <button onclick="testWhatsAppClick()">🔧 Testar Clique WhatsApp</button>
+        <button onclick="testFormSubmit()">📝 Testar Envio Formulário</button>
+        <button onclick="testKitQuote()">🧺 Testar Solicitação Kit</button>
+        <button onclick="testPageView()">👁️ Testar Page View</button>
+    </div>
+
+    <div class="test-section">
+        <h2>3. Console de Eventos</h2>
+        <div id="console-log" class="log"></div>
+        <button onclick="clearLog()">🧹 Limpar Log</button>
+    </div>
+
+    <div class="test-section">
+        <h2>4. Instruções para Validação</h2>
+        <h3>🔗 Google Analytics:</h3>
+        <p>1. Acesse <a href="https://analytics.google.com/" target="_blank">Google Analytics</a></p>
+        <p>2. Vá em Relatórios > Tempo Real</p>
+        <p>3. Execute os testes acima e observe os eventos aparecerem</p>
+
+        <h3>📘 Meta Ads (Facebook):</h3>
+        <p>1. Acesse <a href="https://business.facebook.com/events_manager/" target="_blank">Gerenciador de Eventos</a></p>
+        <p>2. Selecione seu Pixel</p>
+        <p>3. Vá em "Testar Eventos" > "Testar eventos do navegador"</p>
+        <p>4. Insira a URL da sua landing page e execute os testes</p>
+
+        <h3>🎯 RD Station:</h3>
+        <p>1. Acesse sua conta RD Station Marketing</p>
+        <p>2. Vá em Automação > Leads</p>
+        <p>3. Verifique se os leads estão sendo capturados com os eventos personalizados</p>
+    </div>
+
+    <script>
+        // Função para log personalizado
+        function logEvent(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            const logDiv = document.getElementById('console-log');
+            const logEntry = document.createElement('div');
+            logEntry.innerHTML = `<strong>[${timestamp}]</strong> ${message}`;
+            logEntry.style.color = type === 'error' ? 'red' : (type === 'success' ? 'green' : 'blue');
+            logDiv.appendChild(logEntry);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        // Verificar tags instaladas
+        function checkTags() {
+            const statusDiv = document.getElementById('tags-status');
+            let html = '<h3>Status das Tags:</h3>';
+
+            // Google Analytics/Ads
+            if (typeof gtag !== 'undefined') {
+                html += '<div class="success">✅ Google Analytics/Ads: Instalado</div>';
+                logEvent('Google Analytics/Ads detectado', 'success');
+            } else {
+                html += '<div class="error">❌ Google Analytics/Ads: Não detectado</div>';
+                logEvent('Google Analytics/Ads NÃO detectado', 'error');
+            }
+
+            // Meta Pixel
+            if (typeof fbq !== 'undefined') {
+                html += '<div class="success">✅ Meta Pixel (Facebook): Instalado</div>';
+                logEvent('Meta Pixel detectado', 'success');
+            } else {
+                html += '<div class="error">❌ Meta Pixel (Facebook): Não detectado</div>';
+                logEvent('Meta Pixel NÃO detectado', 'error');
+            }
+
+            // RD Station
+            if (typeof rdstation_tracking !== 'undefined') {
+                html += '<div class="success">✅ RD Station: Instalado</div>';
+                logEvent('RD Station detectado', 'success');
+            } else {
+                html += '<div class="warning">⚠️ RD Station: Não detectado (normal se não configurado)</div>';
+                logEvent('RD Station não detectado', 'info');
+            }
+
+            // DataLayer
+            if (typeof dataLayer !== 'undefined') {
+                html += '<div class="success">✅ DataLayer (GTM): Disponível</div>';
+                logEvent('DataLayer detectado', 'success');
+            } else {
+                html += '<div class="warning">⚠️ DataLayer (GTM): Não detectado</div>';
+                logEvent('DataLayer não detectado', 'info');
+            }
+
+            statusDiv.innerHTML = html;
+        }
+
+        // Testes de eventos
+        function testWhatsAppClick() {
+            logEvent('🔧 Testando clique WhatsApp...');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'click', {
+                    'event_category': 'engagement',
+                    'event_label': 'whatsapp_test',
+                    'custom_parameter_1': 'festa_junina_2025',
+                    'value': 1
+                });
+                logEvent('✅ Evento Google Analytics enviado: whatsapp_click', 'success');
+            }
+
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Contact', {
+                    content_name: 'whatsapp_test',
+                    content_category: 'test_event',
+                    value: 50.00,
+                    currency: 'BRL'
+                });
+                logEvent('✅ Evento Meta Pixel enviado: Contact', 'success');
+            }
+
+            if (typeof dataLayer !== 'undefined') {
+                dataLayer.push({
+                    'event': 'whatsapp_click_test',
+                    'event_category': 'engagement',
+                    'event_label': 'test_whatsapp_button'
+                });
+                logEvent('✅ Evento DataLayer enviado: whatsapp_click_test', 'success');
+            }
+        }
+
+        function testFormSubmit() {
+            logEvent('📝 Testando envio de formulário...');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_submit', {
+                    'event_category': 'lead_generation',
+                    'event_label': 'form_test',
+                    'value': 100
+                });
+                logEvent('✅ Evento Google Analytics enviado: form_submit', 'success');
+            }            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'formulario_test',
+                    content_category: 'test_submission',
+                    value: 100.00,
+                    currency: 'BRL'
+                });
+                logEvent('✅ Evento Meta Pixel enviado: Lead', 'success');
+            }
+        }
+
+        function testKitQuote() {
+            logEvent('🧺 Testando solicitação de kit...');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'kit_quote_request', {
+                    'event_category': 'lead_generation',
+                    'event_label': 'kit_test',
+                    'value': 5
+                });
+                logEvent('✅ Evento Google Analytics enviado: kit_quote_request', 'success');
+            }
+
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'kit_test',
+                    num_items: 5
+                });
+                logEvent('✅ Evento Meta Pixel enviado: Lead (Kit)', 'success');
+            }
+        }
+
+        function testPageView() {
+            logEvent('👁️ Testando page view...');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    'page_title': 'Teste Rastreamento',
+                    'page_location': window.location.href
+                });
+                logEvent('✅ Evento Google Analytics enviado: page_view', 'success');
+            }
+
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'PageView');
+                logEvent('✅ Evento Meta Pixel enviado: PageView', 'success');
+            }
+        }
+
+        function clearLog() {
+            document.getElementById('console-log').innerHTML = '';
+        }
+
+        // Executar verificação ao carregar
+        window.addEventListener('load', function() {
+            checkTags();
+            logEvent('🚀 Página de teste carregada');
+        });
+    </script>
+</body>
+</html>
