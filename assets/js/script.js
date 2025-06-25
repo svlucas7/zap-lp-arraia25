@@ -36,14 +36,12 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Rastreamento Meta Pixel
             if (typeof fbq !== 'undefined') {
-                fbq('track', 'Contact', {
+                fbq('track', 'Lead', {
                     content_name: buttonType,
                     content_category: 'whatsapp_click',
                     value: 50.00,
                     currency: 'BRL'
                 });
-                
-                fbq('track', 'Lead');
             }
             
             // RD Station Marketing (evento customizado)
@@ -100,8 +98,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         value: 100.00,
                         currency: 'BRL'
                     });
-                    
-                    fbq('track', 'CompleteRegistration');
                 }
                 
                 // RD Station Marketing (evento customizado)
