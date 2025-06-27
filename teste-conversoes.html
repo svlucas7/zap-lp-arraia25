@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teste de Conversões - Zap Gráfica</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test-button { 
+            background: #25D366; color: white; padding: 15px 30px; 
+            border: none; border-radius: 10px; margin: 10px; 
+            cursor: pointer; font-size: 16px; 
+        }
+        .test-button:hover { background: #20b358; }
+        .result { 
+            background: #f0f0f0; padding: 15px; margin: 10px 0; 
+            border-radius: 5px; border-left: 4px solid #4CAF50; 
+        }
+        .warning { border-left-color: #ff9800; background: #fff3e0; }
+        .info { border-left-color: #2196f3; background: #e3f2fd; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Teste de Conversões</h1>
+    
+    <div class="info">
+        <h3>ℹ️ Como Testar</h3>
+        <p>1. Abra o console do navegador (F12)</p>
+        <p>2. Clique nos botões abaixo</p>
+        <p>3. Verifique as mensagens no console</p>
+        <p>4. Verifique no Google Ads/Facebook se as conversões aparecem</p>
+    </div>
+
+    <h2>🔧 Status das Ferramentas</h2>
+    <div id="status-tools"></div>
+
+    <h2>🎯 Testes de Conversão</h2>
+    
+    <button class="test-button" onclick="testFormStart()">
+        🚀 Testar InitiateCheckout (Início Formulário)
+    </button>
+    
+    <button class="test-button" onclick="testWhatsAppConversion()">
+        📱 Testar Conversão WhatsApp
+    </button>
+    
+    <button class="test-button" onclick="testFormConversion()">
+        📝 Testar Conversão Formulário
+    </button>
+    
+    <button class="test-button" onclick="testNonConversion()">
+        ❌ Testar Evento NÃO-Conversão
+    </button>
+
+    <h2>📊 Resultados dos Testes</h2>
+    <div id="test-results"></div>
+
+    <script>
+        // Verifica se as ferramentas estão carregadas
+        function checkToolsStatus() {
+            const statusDiv = document.getElementById('status-tools');
+            let html = '';
+            
+            html += `<div class="result ${typeof gtag !== 'undefined' ? '' : 'warning'}">`;
+            html += `Google Ads/Analytics: ${typeof gtag !== 'undefined' ? '✅ Carregado' : '❌ Não carregado'}`;
+            html += `</div>`;
+            
+            html += `<div class="result ${typeof fbq !== 'undefined' ? '' : 'warning'}">`;
+            html += `Facebook Pixel: ${typeof fbq !== 'undefined' ? '✅ Carregado' : '❌ Não carregado'}`;
+            html += `</div>`;
+            
+            html += `<div class="result ${typeof dataLayer !== 'undefined' ? '' : 'warning'}">`;
+            html += `DataLayer: ${typeof dataLayer !== 'undefined' ? '✅ Carregado' : '❌ Não carregado'}`;
+            html += `</div>`;
+            
+            statusDiv.innerHTML = html;
+        }
+
+        // Função para adicionar resultado
+        function addResult(message, type = 'result') {
+            const resultsDiv = document.getElementById('test-results');
+            const resultDiv = document.createElement('div');
+            resultDiv.className = `result ${type}`;
+            resultDiv.innerHTML = `<strong>${new Date().toLocaleTimeString()}:</strong> ${message}`;
+            resultsDiv.appendChild(resultDiv);
+        }
+
+        // Teste início do formulário (InitiateCheckout)
+        function testFormStart() {
+            console.log('🧪 TESTE: InitiateCheckout (início formulário) iniciado');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'form_start', {
+                    'event_category': 'engagement',
+                    'event_label': 'test_form_interaction'
+                });
+                addResult('Google Analytics: Evento form_start enviado', 'info');
+            } else {
+                addResult('Google Analytics: Não carregado', 'warning');
+            }
+            
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'InitiateCheckout', {
+                    content_name: 'formulario_orcamento_inicio_test',
+                    content_category: 'form_interaction',
+                    value: 100.00,
+                    currency: 'BRL'
+                });
+                addResult('Facebook: InitiateCheckout enviado', 'result');
+            } else {
+                addResult('Facebook Pixel: Não carregado', 'warning');
+            }
+        }
+
+        // Teste conversão WhatsApp
+        function testWhatsAppConversion() {
+            console.log('🧪 TESTE: Conversão WhatsApp iniciada');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-1001326878/ydbnCPygueQaEJ6SvN0D', // ID real WhatsApp
+                    'value': 50.00,
+                    'currency': 'BRL',
+                    'transaction_id': 'test_whatsapp_' + Date.now()
+                });
+                addResult('Google Ads: Conversão WhatsApp enviada', 'result');
+            } else {
+                addResult('Google Ads: Não carregado', 'warning');
+            }
+            
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'whatsapp_test',
+                    content_category: 'test_conversion',
+                    value: 50.00,
+                    currency: 'BRL'
+                });
+                addResult('Facebook: Conversão Lead enviada', 'result');
+            } else {
+                addResult('Facebook Pixel: Não carregado', 'warning');
+            }
+        }
+
+        // Teste conversão formulário
+        function testFormConversion() {
+            console.log('🧪 TESTE: Conversão Formulário iniciada');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'conversion', {
+                    'send_to': 'AW-1001326878/jByTCP-gueQaEJ6SvN0D', // ID real Formulário
+                    'value': 100.00,
+                    'currency': 'BRL',
+                    'transaction_id': 'test_form_' + Date.now()
+                });
+                addResult('Google Ads: Conversão Formulário enviada', 'result');
+            } else {
+                addResult('Google Ads: Não carregado', 'warning');
+            }
+            
+            if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead', {
+                    content_name: 'form_test',
+                    content_category: 'test_conversion',
+                    value: 100.00,
+                    currency: 'BRL'
+                });
+                addResult('Facebook: Conversão Lead enviada', 'result');
+            } else {
+                addResult('Facebook Pixel: Não carregado', 'warning');
+            }
+        }
+
+        // Teste evento que NÃO deve ser conversão
+        function testNonConversion() {
+            console.log('🧪 TESTE: Evento sem conversão iniciado');
+            
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_scroll', {
+                    'event_category': 'engagement',
+                    'event_label': 'test_scroll'
+                });
+                addResult('Google Analytics: Evento de scroll enviado (NÃO conversão)', 'info');
+            }
+            
+            // Intencionalmente NÃO enviamos para Facebook
+            addResult('Facebook: Nenhum evento enviado (correto para não-conversões)', 'info');
+        }
+
+        // Carrega status ao carregar página
+        document.addEventListener('DOMContentLoaded', checkToolsStatus);
+    </script>
+</body>
+</html>

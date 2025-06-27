@@ -1,5 +1,14 @@
 // JavaScript para Landing Page Festa Junina - Zap Gráfica
 
+// ========== CONFIGURAÇÕES DE CONVERSÃO ==========
+// IDs reais das conversões do Google Ads
+const CONVERSION_CONFIG = {
+    GOOGLE_ADS_ID: 'AW-1001326878',
+    WHATSAPP_CONVERSION: 'AW-1001326878/ydbnCPygueQaEJ6SvN0D', // ✅ WhatsApp Click - Festa Junina
+    FORM_CONVERSION: 'AW-1001326878/jByTCP-gueQaEJ6SvN0D',     // ✅ Form Submit - Orçamento Festa Junina
+    FACEBOOK_PIXEL_ID: '487696269435926'
+};
+
 // Aguarda o carregamento completo da página
 document.addEventListener('DOMContentLoaded', function() {
     
@@ -19,22 +28,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 buttonType = 'whatsapp_form_section';
             }
             
-            // Rastreamento Google Analytics
+            // Rastreamento Google Ads - Conversão
             if (typeof gtag !== 'undefined') {
-                gtag('event', 'click', {
-                    'event_category': 'engagement', 
-                    'event_label': buttonType,
-                    'custom_parameter_1': 'festa_junina_2025',
-                    'value': 1
+                // Evento de conversão para Google Ads
+                gtag('event', 'conversion', {
+                    'send_to': CONVERSION_CONFIG.WHATSAPP_CONVERSION,
+                    'value': 50.00,
+                    'currency': 'BRL',
+                    'transaction_id': 'whatsapp_' + Date.now()
                 });
                 
+                // Evento para Google Analytics
                 gtag('event', 'generate_lead', {
-                    'currency': 'BRL',
-                    'value': 50.00
+                    'event_category': 'lead_generation',
+                    'event_label': buttonType,
+                    'value': 50.00,
+                    'currency': 'BRL'
                 });
             }
             
-            // Rastreamento Meta Pixel
+            // Rastreamento Meta Pixel - Conversão
             if (typeof fbq !== 'undefined') {
                 fbq('track', 'Lead', {
                     content_name: buttonType,
@@ -53,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
             }
             
-            console.log('WhatsApp click tracked:', buttonType);
+            console.log('🎯 CONVERSÃO WHATSAPP: Rastreamento realizado para', buttonType);
         });
     });
     
@@ -75,22 +88,26 @@ document.addEventListener('DOMContentLoaded', function() {
             clearInterval(observeRDForm);
             
             rdForm.addEventListener('submit', function(e) {
-                // Rastreamento Google Analytics
+                // Rastreamento Google Ads - Conversão de Formulário
                 if (typeof gtag !== 'undefined') {
-                    gtag('event', 'form_submit', {
-                        'event_category': 'lead_generation',
-                        'event_label': 'rd_station_form',
-                        'custom_parameter_1': 'festa_junina_2025',
-                        'value': 100
+                    // Evento de conversão para Google Ads
+                    gtag('event', 'conversion', {
+                        'send_to': CONVERSION_CONFIG.FORM_CONVERSION,
+                        'value': 100.00,
+                        'currency': 'BRL',
+                        'transaction_id': 'form_' + Date.now()
                     });
                     
+                    // Evento para Google Analytics
                     gtag('event', 'generate_lead', {
-                        'currency': 'BRL',
-                        'value': 100.00
+                        'event_category': 'lead_generation',
+                        'event_label': 'rd_station_form',
+                        'value': 100.00,
+                        'currency': 'BRL'
                     });
                 }
                 
-                // Rastreamento Meta Pixel
+                // Rastreamento Meta Pixel - Conversão de Formulário
                 if (typeof fbq !== 'undefined') {
                     fbq('track', 'Lead', {
                         content_name: 'formulario_orcamento',
@@ -109,13 +126,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
                 
-                console.log('Form submission tracked: RD Station form');
+                console.log('🎯 CONVERSÃO FORMULÁRIO: Rastreamento realizado para formulário RD Station');
             });
             
-            // Rastrear foco nos campos do formulário
+            // Rastrear início do preenchimento do formulário
             const formFields = rdForm.querySelectorAll('input, textarea, select');
             formFields.forEach(field => {
                 field.addEventListener('focus', function() {
+                    // Google Analytics - Início do formulário
                     if (typeof gtag !== 'undefined') {
                         gtag('event', 'form_start', {
                             'event_category': 'engagement',
@@ -123,9 +141,17 @@ document.addEventListener('DOMContentLoaded', function() {
                         });
                     }
                     
+                    // Facebook Pixel - InitiateCheckout quando começar a preencher
                     if (typeof fbq !== 'undefined') {
-                        fbq('track', 'InitiateCheckout');
+                        fbq('track', 'InitiateCheckout', {
+                            content_name: 'formulario_orcamento_inicio',
+                            content_category: 'form_interaction',
+                            value: 100.00,
+                            currency: 'BRL'
+                        });
                     }
+                    
+                    console.log('📝 INITIATE CHECKOUT: Usuário começou a preencher o formulário');
                 }, { once: true }); // Só dispara uma vez
             });
         }
@@ -404,9 +430,9 @@ function trackEvent(eventName, eventData = {}) {
         });
     }
     
-    // Meta Pixel (Facebook)
-    if (typeof fbq !== 'undefined') {
-        const metaEventName = eventData.metaEvent || eventName;
+    // Meta Pixel (Facebook) - Apenas para eventos marcados como conversão
+    if (typeof fbq !== 'undefined' && eventData.isConversion === true) {
+        const metaEventName = eventData.metaEvent || 'Lead';
         fbq('track', metaEventName, {
             content_name: eventData.label || eventName,
             content_category: eventData.category || 'engagement',
@@ -607,11 +633,12 @@ if (requestQuoteButton) {
         const kitSummaryText = Object.values(kitItems).map(item => `- ${item.name} (Quantidade: ${item.quantity})`).join('\n');
         const fullMessage = `Olá! Gostaria de um orçamento para o seguinte kit de festa junina:\n\n${kitSummaryText}`;
 
-        // Rastreamento do kit personalizado
+        // Rastreamento do kit personalizado (CONVERSÃO)
         trackEvent('kit_quote_request', {
             category: 'lead_generation',
             label: 'monte_seu_kit',
             value: Object.values(kitItems).length,
+            isConversion: true, // Marca como conversão para Facebook
             metaEvent: 'Lead',
             metaParams: {
                 content_name: 'kit_arraia_personalizado',

@@ -47,6 +47,22 @@
       gtag('config', 'AW-1001326878', {
         'allow_enhanced_conversions': true
       });
+      
+      /*
+      IMPORTANTE: Para que as conversões funcionem corretamente no Google Ads, 
+      você precisa:
+      
+      1. Criar ações de conversão no Google Ads:
+         - Uma para "WhatsApp Click" 
+         - Uma para "Form Submit"
+      
+      2. Substituir os IDs no arquivo script.js:
+         - 'AW-1001326878/WhatsApp_Click' -> pelo ID real da conversão WhatsApp
+         - 'AW-1001326878/Form_Submit' -> pelo ID real da conversão Formulário
+      
+      3. Os IDs das conversões ficam no formato: AW-ID_CONTA/LABEL_CONVERSAO
+         Exemplo: AW-1001326878/AbC-DefGhI_jKl
+      */
     </script>
     <!-- End Google Ads Tag --><!-- Alpine JS -->
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
