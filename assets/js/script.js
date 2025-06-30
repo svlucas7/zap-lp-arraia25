@@ -14,20 +14,29 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // ========== RASTREAMENTO DE EVENTOS ==========
     
-    // Rastrear cliques nos botões de WhatsApp
-    const whatsappButtons = document.querySelectorAll('a[href*="whatsapp"], a[href*="wa.me"]');
-    whatsappButtons.forEach((button, index) => {
+    // Rastrear cliques nos botões de WhatsApp (apenas botões reais)
+    const whatsappButtons = document.querySelectorAll('a.btn-whatsapp-conversao');
+    whatsappButtons.forEach((button) => {
+        let clicked = false;
         button.addEventListener('click', function(e) {
+            // Proteção anti-bot: ignora user agents conhecidos de bots
+            const botAgents = [/bot/i, /crawl/i, /spider/i, /facebookexternalhit/i, /WhatsApp/i, /Slackbot/i, /TelegramBot/i];
+            if (botAgents.some(rx => rx.test(navigator.userAgent))) {
+                return;
+            }
+            // Proteção anti-disparo múltiplo
+            if (clicked) return;
+            clicked = true;
+            setTimeout(() => { clicked = false; }, 2000);
             // Identifica o tipo de botão WhatsApp
             let buttonType = 'whatsapp_button';
             if (button.classList.contains('fixed')) {
                 buttonType = 'whatsapp_floating';
-            } else if (button.closest('.hero') || button.closest('section') && button.closest('section').querySelector('h1')) {
+            } else if (button.closest('.hero') || (button.closest('section') && button.closest('section').querySelector('h1'))) {
                 buttonType = 'whatsapp_hero';
             } else if (button.closest('#orcamento')) {
                 buttonType = 'whatsapp_form_section';
             }
-            
             // Rastreamento Google Ads - Conversão
             if (typeof gtag !== 'undefined') {
                 // Evento de conversão para Google Ads
